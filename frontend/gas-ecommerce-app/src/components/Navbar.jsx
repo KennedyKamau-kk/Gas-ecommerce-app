@@ -9,10 +9,33 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [username, setUsername] = useState("");
   
+  // Check if user is logged in
   const token = localStorage.getItem("access");
   const isLoggedIn = !!token;
 
+  // Get username from localStorage when logged in
+  useEffect(() => {
+    if (isLoggedIn) {
+      try {
+        const userData = localStorage.getItem("user");
+        
+        if (userData) {
+          const user = JSON.parse(userData);
+          setUsername(user.username || user.email || "User");
+        } else {
+          // If no user data, try to get from the token or form input
+          setUsername("User"); 
+        }
+      } catch (error) {
+        console.error("Error parsing user data:", error);
+        setUsername("Customer");
+      }
+    }
+  }, [isLoggedIn]);
+
+  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -21,6 +44,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu on window resize
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -31,6 +55,7 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.classList.add('overflow-hidden');
@@ -54,6 +79,7 @@ export default function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
+    localStorage.removeItem("user");
     window.location.href = "/";
   };
 
@@ -164,12 +190,14 @@ export default function Navbar() {
                 <div className="relative">
                   <button
                     onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-900 hover:bg-red-600 transition-all duration-300 group"
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-900 cursor-pointer hover:bg-red-600 transition-all duration-300 group"
                   >
                     <div className="w-8 h-8 rounded-full bg-linear-to-br from-red-600 to-red-800 flex items-center justify-center">
                       <FaUser className="text-white text-sm" />
                     </div>
-                    <span className="text-white font-semibold hidden lg:inline">Account</span>
+                    <span className="text-white font-semibold hidden lg:inline">
+                      {username}
+                    </span>
                     <svg className={`w-4 h-4 text-white transition-transform duration-300 ${isProfileDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
@@ -236,7 +264,7 @@ export default function Navbar() {
                       </div>
                       <div>
                         <p className="text-white font-semibold">Welcome Back!</p>
-                        {/* <p className="text-gray-400 text-sm">Member since 2024</p> */}
+                        <p className="text-gray-400 text-sm">{username}</p>
                       </div>
                     </div>
                   </div>

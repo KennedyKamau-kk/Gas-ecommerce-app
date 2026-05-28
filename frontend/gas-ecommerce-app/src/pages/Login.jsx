@@ -22,6 +22,24 @@ export default function Login() {
         try {
             const res = await loginUser(form);
             login(res.data); 
+
+            let username = "";
+        
+            if (res.data && res.data.user) {
+                username = res.data.user.username || res.data.user.email || "User";
+                localStorage.setItem("user", JSON.stringify(res.data.user));
+            } else if (res.data && res.data.username) {
+                username = res.data.username;
+                localStorage.setItem("user", JSON.stringify({ username: res.data.username }));
+            } else if (form.username) {
+                // Use the username from the form input
+                username = form.username;
+                localStorage.setItem("user", JSON.stringify({ username: form.username }));
+            } else {
+                username = "User";
+                localStorage.setItem("user", JSON.stringify({ username: "User" }));
+            }
+            
             alert("Login successful!");
             window.location.href = "/";
         } catch (error) {
@@ -88,7 +106,7 @@ export default function Login() {
                             <button
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-red-600 transition-colors duration-300"
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer hover:text-red-600 transition-colors duration-300"
                             >
                                 {showPassword ? <FaEyeSlash /> : <FaEye />}
                             </button>
@@ -106,7 +124,7 @@ export default function Login() {
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="relative w-full py-3 px-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-red-600/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 overflow-hidden group"
+                        className="relative w-full py-3 px-4 bg-red-600 text-white font-semibold rounded-lg cursor-pointer hover:bg-red-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-red-600/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 overflow-hidden group"
                     >
                         <span className="relative z-10">
                             {isLoading ? (

@@ -149,7 +149,7 @@ export default function Orders() {
                         </div>
                         
                         {/* Expand Icon */}
-                        <button className="text-gray-400 hover:text-red-600 transition-colors duration-300">
+                        <button className="text-gray-400 cursor-pointer hover:text-red-600 transition-colors duration-300">
                           <svg className={`w-5 h-5 transform transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                           </svg>
@@ -242,7 +242,7 @@ export default function Orders() {
                             <div className="flex justify-between pt-2 border-t border-gray-800">
                               <span className="text-lg font-bold text-white">Grand Total</span>
                               <span className="text-xl font-bold text-white">
-                                KSh {(parseFloat(order.total_amount) + parseFloat(order.total_amount)).toLocaleString()}
+                                KSh {(parseFloat(order.total_amount)).toLocaleString()}
                               </span>
                             </div>
                           </div>
@@ -256,7 +256,7 @@ export default function Orders() {
                           View Details
                         </button> */}
                         {order.status === "pending" && (
-                          <button className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300 font-semibold">
+                          <button className="px-4 py-2 bg-red-600 text-white rounded-lg cursor-pointer hover:bg-red-700 transition-all duration-300 font-semibold">
                             Cancel Order
                           </button>
                         )}

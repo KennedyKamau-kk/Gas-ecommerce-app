@@ -61,10 +61,10 @@ export default function Home() {
                                 Your trusted source for high-quality gas products, cylinders, and accessories. Safe, reliable, and delivered to your doorstep.
                             </p>
                             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-                                <button className="px-8 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-red-600/25">
+                                <button className="px-8 py-3 bg-red-600 text-white font-semibold rounded-lg cursor-pointer hover:bg-red-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-red-600/25">
                                     Shop Now
                                 </button>
-                                <button className="px-8 py-3 border-2 border-red-600 text-red-600 font-semibold rounded-lg hover:bg-red-600 hover:text-white transition-all duration-300">
+                                <button className="px-8 py-3 border-2 border-red-600 text-red-600 font-semibold rounded-lg cursor-pointer hover:bg-red-600 hover:text-white transition-all duration-300">
                                     Learn More
                                 </button>
                             </div>
@@ -178,7 +178,7 @@ export default function Home() {
             <section className="bg-linear-to-b from-gray-500 to-white py-16">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold text-black mb-4">All Gas Products</h2>
+                        <h2 className="text-3xl font-bold text-white mb-4">All Gas Products</h2>
                         <div className="w-24 h-1 bg-red-600 mx-auto"></div>
                         <p className="text-gray-100 font-semibold  mt-4">Browse our complete collection</p>
                     </div>

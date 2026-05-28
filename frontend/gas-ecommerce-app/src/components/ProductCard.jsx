@@ -98,7 +98,7 @@ export default function ProductCard({ product, onAddToCart }) {
         <button
           onClick={handleAddToCart}
           disabled={product.stock === 0}
-          className="relative w-full py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 overflow-hidden group"
+          className="relative w-full py-3 bg-red-600 text-white font-semibold rounded-lg cursor-pointer hover:bg-red-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 overflow-hidden group"
         >
           <span className="relative z-10 flex items-center justify-center gap-2">
             {isAdded ? (
@@ -119,7 +119,7 @@ export default function ProductCard({ product, onAddToCart }) {
         {/* Delivery Info */}
         <div className="mt-3 pt-3 border-t border-gray-800">
           <p className="text-xs text-gray-500 text-center">
-            🚚 Free delivery and orders over KSh 5,000
+            🚚 Free delivery
           </p>
         </div>
       </div>

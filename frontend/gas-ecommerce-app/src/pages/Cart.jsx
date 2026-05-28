@@ -141,7 +141,7 @@ export default function Cart() {
                         </div>
                         <button
                           onClick={() => handleRemove(item.id)}
-                          className="text-gray-500 hover:text-red-600 transition-colors duration-300 self-start"
+                          className="text-gray-500 cursor-pointer hover:text-red-600 transition-colors duration-300 self-start"
                         >
                           <FaTrash />
                         </button>
@@ -155,7 +155,7 @@ export default function Cart() {
                             <button
                               onClick={() => handleDecrease(item.id)}
                               disabled={updatingItem === item.id}
-                              className="w-8 h-8 bg-gray-800 text-white rounded-lg hover:bg-red-600 transition-all duration-300 disabled:opacity-50 flex items-center justify-center"
+                              className="w-8 h-8 bg-gray-800 text-white rounded-lg cursor-pointer hover:bg-red-600 transition-all duration-300 disabled:opacity-50 flex items-center justify-center"
                             >
                               <FaMinus className="text-xs" />
                             </button>
@@ -165,7 +165,7 @@ export default function Cart() {
                             <button
                               onClick={() => handleIncrease(item.id)}
                               disabled={updatingItem === item.id}
-                              className="w-8 h-8 bg-gray-800 text-white rounded-lg hover:bg-red-600 transition-all duration-300 disabled:opacity-50 flex items-center justify-center"
+                              className="w-8 h-8 bg-gray-800 text-white rounded-lg cursor-pointer hover:bg-red-600 transition-all duration-300 disabled:opacity-50 flex items-center justify-center"
                             >
                               <FaPlus className="text-xs" />
                             </button>
