@@ -117,11 +117,11 @@ export default function ProductCard({ product, onAddToCart }) {
         </button>
 
         {/* Delivery Info */}
-        <div className="mt-3 pt-3 border-t border-gray-800">
+        {/* <div className="mt-3 pt-3 border-t border-gray-800">
           <p className="text-xs text-gray-500 text-center">
             🚚 Free delivery
           </p>
-        </div>
+        </div> */}
       </div>
     </div>
   );

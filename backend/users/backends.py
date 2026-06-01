@@ -10,10 +10,10 @@ class EmailOrUsernameBackend(ModelBackend):
         if username is None:
             username = kwargs.get(User.USERNAME_FIELD)
         
-        # Try to find user by username OR email
+        # Try to find user by username OR email with CASE-SENSITIVE matching
         try:
             user = User.objects.get(
-                Q(username=username) | Q(email=username)
+                Q(username__exact=username) | Q(email__exact=username)
             )
         except User.DoesNotExist:
             return None
@@ -21,4 +21,4 @@ class EmailOrUsernameBackend(ModelBackend):
         if user.check_password(password):
             return user
         return None
-
+    

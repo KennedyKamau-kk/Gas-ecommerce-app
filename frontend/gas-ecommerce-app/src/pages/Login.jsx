@@ -154,7 +154,7 @@ export default function Login() {
                 </form>
 
                 {/* Features Section */}
-                <div className="mt-8 pt-6 border-t border-gray-800">
+                {/* <div className="mt-8 pt-6 border-t border-gray-800">
                     <div className="grid grid-cols-3 gap-4 text-center">
                         <div className="group">
                             <div className="text-red-600 text-2xl mb-1 group-hover:scale-110 transition-transform duration-300">🔒</div>
@@ -169,7 +169,7 @@ export default function Login() {
                             <p className="text-xs text-gray-500">Protected</p>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );

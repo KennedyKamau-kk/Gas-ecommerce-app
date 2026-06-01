@@ -6,6 +6,7 @@ import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Orders from "../pages/Order";
 import ProductDetails from "../pages/ProductDetails";
+import Notifications from "../pages/Notifications";
 import ProtectedRoute from "../components/ProtectedRoute";
 
 export default function AppRoutes() {
@@ -39,6 +40,7 @@ export default function AppRoutes() {
           </ProtectedRoute>
         }
       />
-    </Routes>
+      <Route path="/notifications" element={<Notifications />}/>
+    </Routes>    
   );
 }

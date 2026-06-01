@@ -1,11 +1,13 @@
 import { Link, NavLink } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../context/CartContext";
+import { NotificationContext } from "../context/NotificationContext";
 import { IoCartOutline } from "react-icons/io5";
-import { FaBars, FaTimes, FaFire, FaUser, FaShoppingBag, FaInfoCircle, FaEnvelope, FaHome } from "react-icons/fa";
+import { FaBars, FaTimes, FaFire, FaUser, FaShoppingBag, FaInfoCircle, FaEnvelope, FaHome, FaBell } from "react-icons/fa";
 
 export default function Navbar() {
   const { cartCount } = useContext(CartContext);
+  const { unreadCount } = useContext(NotificationContext);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
@@ -92,7 +94,6 @@ export default function Navbar() {
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 lg:h-20">
-            
             {/* Logo section */}
             <Link 
               to="/" 
@@ -106,6 +107,40 @@ export default function Navbar() {
                 <span className="font-serif text-black">Market</span>
               </h1>
             </Link>
+
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden relative z-50 w-10 h-10 flex items-center justify-center rounded-lg bg-red-600 backdrop-blur-sm hover:bg-black transition-all duration-300 group order-first"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? (
+                <FaTimes size={22} className="text-white group-hover:rotate-90 transition-transform duration-300" />
+              ) : (
+                <FaBars size={22} className="text-white group-hover:scale-110 transition-transform duration-300" />
+              )}
+            </button>
+
+            {/* Mobile Cart Icon */}
+            <div className="md:hidden flex items-center gap-3">
+              <Link 
+                to="/cart" 
+                className="relative group"
+                onClick={handleCartClick}
+              >
+                <div className="relative">
+                  <IoCartOutline className="h-6 w-6 text-black-300 group-hover:text-red-600 transition-all duration-300 group-hover:scale-110" />
+                  {cartCount > 0 && (
+                    <>
+                      <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-1.5 py-0.5 rounded-full font-bold min-w-5 text-center animate-bounce">
+                        {cartCount}
+                      </span>
+                      <span className="absolute -top-2 -right-2 w-full h-full animate-ping bg-red-600 rounded-full opacity-75"></span>
+                    </>
+                  )}
+                </div>
+              </Link>
+            </div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8 lg:gap-12">
@@ -213,12 +248,27 @@ export default function Navbar() {
                         <FaShoppingBag />
                         <span>My Orders</span>
                       </Link>
+                      
+                      {/* Notification Bell */}
+                      <Link 
+                        to="/notifications" 
+                        className="flex items-center gap-3 px-4 py-3 text-black-300 font-semibold hover:bg-red-600 hover:text-white transition-all duration-300"
+                        onClick={() => setIsProfileDropdownOpen(false)}
+                      >
+                        <FaBell />
+                        <span>Notifications</span>
+                        {unreadCount > 0 && (
+                          <span className="ml-auto bg-red-500 text-white text-xs rounded-full px-2">
+                            {unreadCount}
+                          </span>
+                        )}
+                      </Link>
                       <button 
                         onClick={() => {
                           handleLogout();
                           setIsProfileDropdownOpen(false);
                         }}
-                        className="flex items-center gap-3 w-full px-4 py-3 text-black-300 font-semibold hover:bg-red-600 hover:text-white transition-all duration-300"
+                        className="flex items-center gap-3 w-full px-4 py-3 text-black-300 font-semibold cursor-pointer hover:bg-red-600 hover:text-white transition-all duration-300"
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -230,19 +280,6 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-
-            {/* Mobile Menu Button */}
-            <button 
-              className="md:hidden relative z-50 w-10 h-10 flex items-center justify-center rounded-lg bg-red-600 backdrop-blur-sm hover:bg-black transition-all duration-300 group"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? (
-                <FaTimes size={22} className="text-white group-hover:rotate-90 transition-transform duration-300" />
-              ) : (
-                <FaBars size={22} className="text-white group-hover:scale-110 transition-transform duration-300" />
-              )}
-            </button>
           </div>
         </div>
 
@@ -306,28 +343,25 @@ export default function Navbar() {
                     <FaEnvelope className="text-xl" />
                     <span className="font-semibold">Contact</span>
                   </NavLink>
-                  
-                  <div className="h-px bg-linear-to-b-r from-transparent via-red-600 to-transparent my-3"></div>
-                  
+
+                  {/* Mobile Notifications */}
                   <Link 
-                    to="/cart" 
-                    onClick={(e) => {
-                      setIsMobileMenuOpen(false);
-                      handleCartClick(e);
-                    }}
+                    to="/notifications" 
+                    onClick={() => setIsMobileMenuOpen(false)}
                     className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-white/10 transition-all duration-300 group"
                   >
                     <div className="flex items-center gap-3">
-                      <IoCartOutline className="text-xl text-gray-400 group-hover:text-white" />
-                      <span className="font-semibold text-gray-300 group-hover:text-white">Cart</span>
+                      <FaBell className="text-xl text-gray-400 group-hover:text-white" />
+                      <span className="font-semibold text-gray-300 group-hover:text-white">Notifications</span>
                     </div>
-                    {cartCount > 0 && (
-                      <span className="bg-red-600 text-white text-xs px-2.5 py-1 rounded-full font-bold">
-                        {cartCount} items
+                    {unreadCount > 0 && (
+                      <span className="bg-red-500 text-white text-xs px-2.5 py-1 rounded-full font-bold">
+                        {unreadCount} new
                       </span>
                     )}
                   </Link>
                   
+                  <div className="h-px bg-linear-to-b-r from-transparent via-red-600 to-transparent my-3"></div>
                   <div className="mt-4">
                     <div className="h-px bg-linear-to-b-r from-transparent via-red-600 to-transparent mb-4"></div>
                     

@@ -45,7 +45,7 @@ export default function ProductDetails() {
     return (
       <div className="min-h-screen bg-linear-to-b from-white to-gray-500 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-gray-700 border-t-red-600 rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto mb-4"></div>
           <p className="text-gray-700">Loading product details...</p>
         </div>
       </div>
