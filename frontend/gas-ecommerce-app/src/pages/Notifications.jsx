@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { FaBell, FaCheckCircle, FaArrowLeft, FaTrash } from "react-icons/fa";
 
 export default function Notifications() {
-  const { notifications, fetchNotifications, unreadCount, loading, isAuthenticated } = useContext(NotificationContext);
+  const { notifications, fetchNotifications, unreadCount, loading } = useContext(NotificationContext);
 
   const handleRead = async (id) => {
     try {
@@ -60,26 +60,6 @@ export default function Notifications() {
           <div className="text-center py-12 sm:py-20">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto mb-4"></div>
             <p className="text-gray-700">Loading notifications...</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-linear-to-b from-white to-gray-500 py-6 sm:py-10">
-        <div className="max-w-4xl mx-auto px-3 sm:px-4">
-          <div className="text-center py-12 sm:py-20 bg-gray-900/50 rounded-2xl border border-gray-800">
-            <FaBell className="text-5xl sm:text-6xl text-gray-700 mx-auto mb-4" />
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">Authentication Required</h2>
-            <p className="text-gray-200 mb-6 text-sm sm:text-base">Please log in to view your notifications</p>
-            <Link 
-              to="/login" 
-              className="inline-block px-5 sm:px-6 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300 text-sm sm:text-base"
-            >
-              Go to Login
-            </Link>
           </div>
         </div>
       </div>
@@ -170,7 +150,7 @@ export default function Notifications() {
                       <div className="flex items-start gap-2 sm:gap-3">
                         {/* Unread Indicator */}
                         {!notification.is_read && (
-                          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 mt-1.5 sm:mt-2 bg-red-600 rounded-full animate-pulse flex-shrink-0"></div>
+                          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 mt-1.5 sm:mt-2 bg-red-600 rounded-full animate-pulse shrink-0"></div>
                         )}
                         <div className="flex-1 min-w-0">
                           <p className={`

@@ -5,6 +5,7 @@ import Register from "../pages/Register";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Orders from "../pages/Order";
+import Profile from "../pages/Profile";
 import ProductDetails from "../pages/ProductDetails";
 import Notifications from "../pages/Notifications";
 import ProtectedRoute from "../components/ProtectedRoute";
@@ -40,7 +41,22 @@ export default function AppRoutes() {
           </ProtectedRoute>
         }
       />
-      <Route path="/notifications" element={<Notifications />}/>
+      <Route
+        path="/notifications"
+        element={
+          <ProtectedRoute>
+            <Notifications />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        }
+      />
     </Routes>    
   );
 }

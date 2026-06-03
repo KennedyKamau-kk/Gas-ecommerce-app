@@ -162,7 +162,7 @@ export default function Navbar() {
                   to="/about" 
                   className={({ isActive }) => 
                     `relative group flex items-center gap-2 font-semibold transition-all duration-300 ${
-                      isActive ? "text-red-600" : "text-black-300 hover:text-red-500"
+                      isActive ? "text-red-600" : "text-black hover:text-red-500"
                     }`
                   }
                 >
@@ -175,7 +175,7 @@ export default function Navbar() {
                   to="/contact"
                   className={({ isActive }) => 
                     `relative group flex items-center gap-2 font-semibold transition-all duration-300 ${
-                      isActive ? "text-red-600" : "text-black-300 hover:text-red-500"
+                      isActive ? "text-red-600" : "text-black hover:text-red-500"
                     }`
                   }
                 >
@@ -252,7 +252,7 @@ export default function Navbar() {
                       {/* Notification Bell */}
                       <Link 
                         to="/notifications" 
-                        className="flex items-center gap-3 px-4 py-3 text-black-300 font-semibold hover:bg-red-600 hover:text-white transition-all duration-300"
+                        className="flex items-center gap-3 px-4 py-3 text-black font-semibold hover:bg-red-600 hover:text-white transition-all duration-300"
                         onClick={() => setIsProfileDropdownOpen(false)}
                       >
                         <FaBell />
@@ -262,6 +262,14 @@ export default function Navbar() {
                             {unreadCount}
                           </span>
                         )}
+                      </Link>
+                      <Link 
+                        to="/profile" 
+                        className="flex items-center gap-3 px-4 py-3 text-black font-semibold hover:bg-red-600 hover:text-white transition-all duration-300"
+                        onClick={() => setIsProfileDropdownOpen(false)}
+                      >
+                        <FaUser />
+                        <span>My Profile</span>
                       </Link>
                       <button 
                         onClick={() => {
@@ -344,22 +352,33 @@ export default function Navbar() {
                     <span className="font-semibold">Contact</span>
                   </NavLink>
 
-                  {/* Mobile Notifications */}
-                  <Link 
+                  <NavLink 
                     to="/notifications" 
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-white/10 transition-all duration-300 group"
+                    className={({ isActive }) => 
+                      `${isActive ? "bg-red-600 text-white shadow-lg" : "text-gray-300 hover:bg-white/10 hover:text-white"} 
+                      flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group`
+                    }
                   >
-                    <div className="flex items-center gap-3">
-                      <FaBell className="text-xl text-gray-400 group-hover:text-white" />
-                      <span className="font-semibold text-gray-300 group-hover:text-white">Notifications</span>
-                    </div>
+                    <FaBell className="text-xl" />
+                    <span className="font-semibold">Notifications</span>
                     {unreadCount > 0 && (
                       <span className="bg-red-500 text-white text-xs px-2.5 py-1 rounded-full font-bold">
                         {unreadCount} new
                       </span>
                     )}
-                  </Link>
+                  </NavLink>
+                  <NavLink 
+                    to="/profile" 
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={({ isActive }) => 
+                      `${isActive ? "bg-red-600 text-white shadow-lg" : "text-gray-300 hover:bg-white/10 hover:text-white"} 
+                      flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group`
+                    }
+                  >
+                    <FaUser className="text-xl" />
+                    <span className="font-semibold">My Profile</span>
+                  </NavLink>
                   
                   <div className="h-px bg-linear-to-b-r from-transparent via-red-600 to-transparent my-3"></div>
                   <div className="mt-4">

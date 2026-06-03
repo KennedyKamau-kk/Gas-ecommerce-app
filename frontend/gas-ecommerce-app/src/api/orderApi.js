@@ -14,3 +14,13 @@ export const getOrders = () => {
 export const getOrder = (orderId) => {
   return privateApi.get(`orders/${orderId}/`);
 };
+
+export const getOrdersCount = async () => {
+  try {
+    const response = await getOrders();
+    return response.data?.length || 0;
+  } catch (error) {
+    console.error("Error fetching orders count:", error);
+    return 0;
+  }
+};
