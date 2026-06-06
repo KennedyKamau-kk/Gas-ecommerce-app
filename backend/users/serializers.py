@@ -1,3 +1,4 @@
+# users/serializers.py
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
@@ -39,3 +40,22 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'email', 'phone_number', 'address']
+
+# Serializers for password reset
+class ForgotPasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    
+    def validate_email(self, value):
+        # Check if email exists in database (case-insensitive)
+        if not User.objects.filter(email__iexact=value).exists():
+            raise serializers.ValidationError("No user found with this email address.")
+        return value
+
+class ResetPasswordSerializer(serializers.Serializer):
+    new_password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+    confirm_password = serializers.CharField(write_only=True, required=True)
+    
+    def validate(self, attrs):
+        if attrs['new_password'] != attrs['confirm_password']:
+            raise serializers.ValidationError({"confirm_password": "Password fields didn't match."})
+        return attrs

@@ -9,6 +9,8 @@ import Profile from "../pages/Profile";
 import ProductDetails from "../pages/ProductDetails";
 import Notifications from "../pages/Notifications";
 import ProtectedRoute from "../components/ProtectedRoute";
+import ForgotPassword from "../components/ForgotPassword";
+import ResetPassword from "../components/ResetPassword";
 
 export default function AppRoutes() {
   return (
@@ -57,6 +59,8 @@ export default function AppRoutes() {
           </ProtectedRoute>
         }
       />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password/:token" element={<ResetPassword />} />
     </Routes>    
   );
 }

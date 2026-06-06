@@ -144,7 +144,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
 
-# Add this to your settings.py
 AUTHENTICATION_BACKENDS = [
     'users.backends.EmailOrUsernameBackend',
     'django.contrib.auth.backends.ModelBackend',
@@ -214,3 +213,14 @@ if MPESA_ENV == "sandbox":
     MPESA_BASE_URL = "https://sandbox.safaricom.co.ke"
 else:
     MPESA_BASE_URL = "https://api.safaricom.co.ke"
+
+# Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+# Frontend URL for password reset links
+FRONTEND_URL = 'http://localhost:5173'
