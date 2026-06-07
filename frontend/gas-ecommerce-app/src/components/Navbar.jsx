@@ -1,9 +1,10 @@
+import toast from 'react-hot-toast';
 import { Link, NavLink } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../context/CartContext";
 import { NotificationContext } from "../context/NotificationContext";
 import { IoCartOutline } from "react-icons/io5";
-import { FaBars, FaTimes, FaFire, FaUser, FaShoppingBag, FaInfoCircle, FaEnvelope, FaHome, FaBell } from "react-icons/fa";
+import { FaBars, FaTimes, FaFire, FaUser, FaShoppingBag, FaInfoCircle, FaEnvelope, FaHome, FaBell, FaLock } from "react-icons/fa";
 
 export default function Navbar() {
   const { cartCount } = useContext(CartContext);
@@ -72,7 +73,22 @@ export default function Navbar() {
   const handleCartClick = (e) => {
     if (!isLoggedIn) {
       e.preventDefault();
-      alert("Please login/register to view your cart");
+      toast.error('Please login/register to view your cart', {
+        duration: 4000,
+        position: 'top-center',
+        icon: <FaLock />,
+        style: {
+          background: 'linear-gradient(135deg, #000000 0%, #1a1a1a 100%)',
+          color: '#ffffff',
+          padding: '16px 24px',
+          borderRadius: '16px',
+          border: '1px solid #DC2626',
+          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(220, 38, 38, 0.2)',
+          fontSize: '14px',
+          fontWeight: '600',
+          backdropFilter: 'blur(10px)',
+        },
+      });
     } else {
       setIsMobileMenuOpen(false);
     }

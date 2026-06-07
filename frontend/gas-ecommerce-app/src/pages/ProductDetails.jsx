@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { getProduct } from "../api/productApi";
 import { addToCart } from "../api/cartApi";
 import { CartContext } from "../context/CartContext";
-import { FaShoppingCart, FaArrowLeft, FaCheckCircle, FaFire, FaStar, FaGasPump, FaTruck, FaShieldAlt } from "react-icons/fa";
+import { FaShoppingCart, FaArrowLeft, FaCheckCircle, FaStar, FaFire, FaTruck, FaShieldAlt } from "react-icons/fa";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -56,9 +56,9 @@ export default function ProductDetails() {
     return (
       <div className="min-h-screen bg-linear-to-b from-white to-gray-500 flex items-center justify-center">
         <div className="text-center">
-          <FaFire className="text-6xl text-gray-700 mx-auto mb-4" />
-          <p className="text-gray-700 text-lg">Product not found</p>
-          <Link to="/" className="inline-block mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300">
+          <FaFire className="text-5xl sm:text-6xl text-gray-700 mx-auto mb-4" />
+          <p className="text-gray-700 text-base sm:text-lg">Product not found</p>
+          <Link to="/" className="inline-block mt-4 px-5 sm:px-6 py-2 sm:py-2.5 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300 text-sm sm:text-base">
             Back to Home
           </Link>
         </div>
@@ -67,34 +67,34 @@ export default function ProductDetails() {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-white to-gray-500 py-10">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-linear-to-b from-white to-gray-500 py-6 sm:py-10">
+      <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-8">
         {/* Back Button */}
         <Link 
           to="/" 
-          className="inline-flex items-center gap-2 text-gray-700 font-semibold hover:text-red-600 transition-colors duration-300 mb-6 group"
+          className="inline-flex items-center gap-2 text-gray-700 font-semibold hover:text-red-600 transition-colors duration-300 mb-4 sm:mb-6 group text-sm sm:text-base"
         >
-          <FaArrowLeft className="group-hover:-translate-x-1 transition-transform duration-300" />
+          <FaArrowLeft className="group-hover:-translate-x-1 transition-transform duration-300 text-xs sm:text-sm" />
           Back to Products
         </Link>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
           {/* Product Image Section */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             <div className="bg-linear-to-br from-gray-900 to-black rounded-2xl border border-gray-800 overflow-hidden group">
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full h-96 lg:h-125 object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-64 sm:h-80 lg:h-96 xl:h-125 transition-transform duration-500 group-hover:scale-105"
               />
             </div>            
           </div>
 
           {/* Product Info Section */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {/* Stock Status */}
-            <div className="flex items-center gap-3">
-              <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              <span className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-semibold ${
                 product.stock > 10 
                   ? "bg-green-600/10 text-green-600 border font-bold border-green-600/30" 
                   : product.stock > 0 
@@ -103,58 +103,52 @@ export default function ProductDetails() {
               }`}>
                 {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
               </span>
-              {/* {product.featured && (
-                <span className="flex items-center gap-1 px-3 py-1 bg-red-600/10 text-red-500 border border-red-600/30 rounded-full text-sm font-semibold">
-                  <FaFire className="text-xs" />
-                  Featured
-                </span>
-              )} */}
             </div>
 
             {/* Product Name */}
-            <h1 className="text-3xl lg:text-4xl font-bold text-black">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-black">
               {product.name}
             </h1>
 
             {/* Product Description */}
-            <p className="text-gray-700 font-semibold leading-relaxed">
+            <p className="text-gray-700 font-semibold leading-relaxed text-sm sm:text-base">
               {product.description}
             </p>
 
             {/* Price */}
-            <div className="flex items-baseline gap-3">
-              <p className="text-lg font-bold text-red-600">
+            <div className="flex items-baseline gap-2 sm:gap-3">
+              <p className="text-base sm:text-lg lg:text-xl font-bold text-red-600">
                 KSh {parseFloat(product.price).toLocaleString()}
               </p>
               {product.originalPrice && (
-                <p className="text-lg text-red-500 line-through">
+                <p className="text-base sm:text-lg text-red-500 line-through">
                   KSh {parseFloat(product.originalPrice).toLocaleString()}
                 </p>
               )}
             </div>
 
             {/* Quantity Selector */}
-            <div className="space-y-3">
-              <label className="text-gray-700 font-semibold">Quantity:</label>
-              <div className="flex items-center gap-3">
+            <div className="space-y-2 sm:space-y-3">
+              <label className="text-gray-700 font-semibold text-sm sm:text-base">Quantity:</label>
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                   disabled={quantity <= 1}
-                  className="w-10 h-10 bg-gray-800 text-white rounded-lg hover:bg-red-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-800 text-white rounded-lg hover:bg-red-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                 >
                   -
                 </button>
-                <span className="text-red-600 text-xl font-semibold min-w-12.5 text-center">
+                <span className="text-red-600 text-base sm:text-xl font-semibold min-w-10 text-center">
                   {quantity}
                 </span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
                   disabled={product.stock <= quantity}
-                  className="w-10 h-10 bg-gray-800 text-white rounded-lg hover:bg-red-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-800 text-white rounded-lg hover:bg-red-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                 >
                   +
                 </button>
-                <span className="text-gray-700 font-semibold text-sm ml-2">
+                <span className="text-gray-700 font-semibold text-xs sm:text-sm ml-0 sm:ml-2">
                   {product.stock} available
                 </span>
               </div>
@@ -164,17 +158,17 @@ export default function ProductDetails() {
             <button
               onClick={handleAddToCart}
               disabled={product.stock === 0}
-              className="relative w-full py-4 bg-red-600 text-white font-semibold rounded-xl hover:bg-red-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-red-600/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 overflow-hidden group"
+              className="relative w-full py-3 sm:py-4 bg-red-600 text-white font-semibold rounded-xl hover:bg-red-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-red-600/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 overflow-hidden group text-sm sm:text-base"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 {addedToCart ? (
                   <>
-                    <FaCheckCircle className="animate-bounce" />
+                    <FaCheckCircle className="animate-bounce text-sm sm:text-base" />
                     Added to Cart!
                   </>
                 ) : (
                   <>
-                    <FaShoppingCart />
+                    <FaShoppingCart className="text-sm sm:text-base" />
                     Add to Cart - KSh {(parseFloat(product.price) * quantity).toLocaleString()}
                   </>
                 )}
@@ -183,52 +177,52 @@ export default function ProductDetails() {
             </button>
 
             {/* Features Section */}
-            <div className="pt-6 mt-6 border-t border-gray-800">
-              <h3 className="text-white font-semibold mb-4">Product Features:</h3>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="flex items-center gap-2 text-gray-700 font-semibold text-sm">
-                  <FaFire className="text-red-600" />
+            <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-gray-800">
+              <h3 className="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Product Features:</h3>
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                <div className="flex items-center gap-1.5 sm:gap-2 text-gray-700 font-semibold text-xs sm:text-sm">
+                  <FaFire className="text-red-600 text-sm sm:text-base" />
                   <span>High Purity</span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-700 font-semibold text-sm">
-                  <FaShieldAlt className="text-red-600" />
+                <div className="flex items-center gap-1.5 sm:gap-2 text-gray-700 font-semibold text-xs sm:text-sm">
+                  <FaShieldAlt className="text-red-600 text-sm sm:text-base" />
                   <span>Safety Certified</span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-700 font-semibold text-sm">
-                  <FaTruck className="text-red-600" />
+                <div className="flex items-center gap-1.5 sm:gap-2 text-gray-700 font-semibold text-xs sm:text-sm">
+                  <FaTruck className="text-red-600 text-sm sm:text-base" />
                   <span>Free Delivery</span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-700 font-semibold text-sm">
-                  <FaStar className="text-red-600" />
+                <div className="flex items-center gap-1.5 sm:gap-2 text-gray-700 font-semibold text-xs sm:text-sm">
+                  <FaStar className="text-red-600 text-sm sm:text-base" />
                   <span>Quality Guaranteed</span>
                 </div>
               </div>
             </div>
 
             {/* Delivery Info */}
-            <div className="bg-gray-900/50 rounded-xl p-4 border border-gray-800">
-              <div className="flex items-start gap-3">
-                <FaTruck className="text-red-600 text-xl mt-1" />
+            <div className="bg-gray-900/50 rounded-xl p-3 sm:p-4 border border-gray-800">
+              <div className="flex items-start gap-2 sm:gap-3">
+                <FaTruck className="text-red-600 text-base sm:text-xl mt-0.5 sm:mt-1 flex-shrink-0" />
                 <div>
-                  <p className="text-white font-semibold">Free Delivery</p>
-                  <p className="text-gray-200 text-sm">Orders qualify for free delivery within Nairobi</p>
+                  <p className="text-white font-semibold text-sm sm:text-base">Free Delivery</p>
+                  <p className="text-gray-200 text-xs sm:text-sm">Orders qualify for free delivery within Nairobi</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Related Products Section (Optional) */}
-        <div className="mt-16 pt-8 border-t border-gray-800">
-          <h2 className="text-2xl font-bold text-white mb-6">Related Products</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {/* Related Products Section */}
+        <div className="mt-10 sm:mt-16 pt-6 sm:pt-8 border-t border-gray-800">
+          <h2 className="text-lg sm:text-2xl font-bold text-white mb-4 sm:mb-6">Related Products</h2>
+          <div className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-4">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="bg-linear-to-br from-gray-900 to-black rounded-lg border border-gray-800 p-3 hover:border-red-600 transition-all duration-300 hover:transform hover:-translate-y-1">
-                <div className="bg-gray-800 h-32 rounded-lg mb-2 flex items-center justify-center">
-                  <FaGasPump className="text-4xl text-gray-700" />
+              <div key={i} className="bg-linear-to-br from-gray-900 to-black rounded-lg border border-gray-800 p-2 sm:p-3 hover:border-red-600 transition-all duration-300 hover:transform hover:-translate-y-1">
+                <div className="bg-gray-800 h-24 sm:h-28 md:h-32 rounded-lg mb-1.5 sm:mb-2 flex items-center justify-center">
+                  <FaFire className="text-3xl sm:text-4xl text-gray-700" />
                 </div>
-                <p className="text-white text-sm font-semibold">Gas Cylinder {i}kg</p>
-                <p className="text-red-600 text-xs font-bold">KSh {2500 * i}</p>
+                <p className="text-white text-xs sm:text-sm font-semibold truncate">Gas Cylinder {i}kg</p>
+                <p className="text-red-600 text-xs sm:text-sm font-bold">KSh {(2500 * i).toLocaleString()}</p>
               </div>
             ))}
           </div>

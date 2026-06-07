@@ -74,7 +74,7 @@ class ForgotPasswordView(APIView):
             
             # Create new token (expires in 24 hours)
             token = PasswordResetToken.objects.create(
-                user=user,
+                user=user, 
                 expires_at=timezone.now() + timedelta(hours=24)
             )
             
@@ -85,18 +85,18 @@ class ForgotPasswordView(APIView):
             # Send email
             try:
                 send_mail(
-                    subject="Password Reset Request - Your App Name",
+                    subject="Password Reset Request - Gas Market",
                     message=f"""Hello {user.username},
 
-                    You requested to reset your password for your account.
+            You requested to reset your password for your account.
 
-                    Click the link below to reset your password (valid for 24 hours):
-                    {reset_link}
+            Click the link below to reset your password (valid for 24 hours):
+            {reset_link}
 
-                    If you didn't request this, please ignore this email.
+            If you didn't request this, please ignore this email.
 
-                    Best regards,
-                    Gas Market""",
+            Best regards,
+            Gas Market""",  
                     from_email=settings.EMAIL_HOST_USER,
                     recipient_list=[email],
                     fail_silently=False,

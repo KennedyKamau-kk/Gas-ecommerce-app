@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useResetPassword, useValidateToken } from '../hooks/useResetPassword';
-import { FaEye, FaEyeSlash, FaCheckCircle, FaTimesCircle, FaSpinner, FaArrowLeft, FaShieldAlt } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaCheckCircle, FaTimesCircle, FaSpinner, FaArrowLeft, FaShieldAlt, FaExclamationTriangle } from 'react-icons/fa';
 
 const ResetPassword = () => {
     const { token } = useParams();
@@ -75,7 +75,7 @@ const ResetPassword = () => {
         return (
             <div className="min-h-screen bg-linear-to-br from-black via-gray-900 to-black flex items-center justify-center px-4">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-gray-700 border-t-red-600 rounded-full animate-spin mx-auto mb-4"></div>
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto mb-4"></div>
                     <p className="text-gray-400">Validating reset link...</p>
                 </div>
             </div>
@@ -143,7 +143,7 @@ const ResetPassword = () => {
                     <h2 className="text-3xl font-bold text-white">Create New Password</h2>
                     <div className="w-20 h-1 bg-red-600 mx-auto mt-2"></div>
                     <p className="text-gray-400 mt-4">
-                        Set a new password for <strong className="text-red-600">{email}</strong>
+                        Set a new password for <strong className="text-white">{email}</strong>
                     </p>
                 </div>
 
@@ -256,7 +256,7 @@ const ResetPassword = () => {
                         </div>
                         {formData.confirm_password && formData.new_password !== formData.confirm_password && (
                             <div className="mt-2 text-red-500 text-sm flex items-center gap-1">
-                                <span>⚠️</span>
+                                <span><FaExclamationTriangle /></span>
                                 Passwords do not match
                             </div>
                         )}
